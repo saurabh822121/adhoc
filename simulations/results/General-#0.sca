@@ -1,0 +1,1581 @@
+version 3
+run General-0-20241119-17:43:37-15452
+attr configname General
+attr datetime 20241119-17:43:37
+attr datetimef 20241119-174337
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network Network
+attr processid 15452
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../inet4.5/images
+config network Network
+config sim-time-limit 10s
+config **.client.numApps 1
+config **.client.app[0].typename TcpSessionApp
+config **.client.app[0].connectAddress "\"server\""
+config **.client.app[0].connectPort 1000
+config **.client.app[0].sendBytes 1MB
+config **.server.numApps 1
+config **.server.app[0].typename TcpEchoApp
+config **.server.app[0].localPort 1000
+
+par Network.server.ethg$o[0].channel typename "\"inet.node.ethernet.Eth100M\""
+par Network.server.ethg$o[0].channel disabled false
+attr mutable ""
+par Network.server.ethg$o[0].channel delay 5e-08s
+attr mutable ""
+attr unit s
+par Network.server.ethg$o[0].channel datarate 1e+08bps
+attr mutable ""
+attr unit bps
+par Network.server.ethg$o[0].channel ber 0
+attr mutable ""
+par Network.server.ethg$o[0].channel per 0
+attr mutable ""
+par Network.server.ethg$o[0].channel length 10m
+attr unit m
+par Network.client.ethg$o[0].channel typename "\"inet.node.ethernet.Eth100M\""
+par Network.client.ethg$o[0].channel disabled false
+attr mutable ""
+par Network.client.ethg$o[0].channel delay 5e-08s
+attr mutable ""
+attr unit s
+par Network.client.ethg$o[0].channel datarate 1e+08bps
+attr mutable ""
+attr unit bps
+par Network.client.ethg$o[0].channel ber 0
+attr mutable ""
+par Network.client.ethg$o[0].channel per 0
+attr mutable ""
+par Network.client.ethg$o[0].channel length 10m
+attr unit m
+par Network.server.ethg$i[0].channel typename "\"ned.IdealChannel\""
+par Network.server.eth[0].phys$o.channel typename "\"ned.IdealChannel\""
+par Network.server.interfaceTable typename "\"inet.networklayer.common.InterfaceTable\""
+par Network.server.interfaceTable displayAddresses false
+par Network.server.cb typename "\"inet.common.MessageDispatcher\""
+par Network.server.cb displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.server.cb forwardServiceRegistration true
+par Network.server.cb forwardProtocolRegistration true
+par Network.server.bl typename "\"inet.common.MessageDispatcher\""
+par Network.server.bl displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.server.bl forwardServiceRegistration true
+par Network.server.bl forwardProtocolRegistration true
+par Network.server.ethernet typename "\"inet.linklayer.ethernet.basic.EthernetEncapsulation\""
+par Network.server.ethernet registerProtocol true
+par Network.server.ethernet interfaceTableModule "\"Network.server.interfaceTable\""
+par Network.server.ethernet fcsMode "\"declared\""
+attr enum declared,computed
+par Network.server.ethernet stopOperationExtraTime -1s
+attr unit s
+par Network.server.ethernet stopOperationTimeout 2s
+attr unit s
+scalar Network.server.ethernet decapPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source decapPk
+attr title "packets decapsulated, count"
+scalar Network.server.ethernet decapPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source decapPk
+attr title "packets decapsulated, sum(packetBytes)"
+scalar Network.server.ethernet encapPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source encapPk
+attr title "packets encapsulated, count"
+scalar Network.server.ethernet encapPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source encapPk
+attr title "packets encapsulated, sum(packetBytes)"
+scalar Network.server.ethernet pauseSent:count 0
+attr recordingmode count
+attr title "pause sent, count"
+scalar Network.server.ethernet pauseSent:sum 0
+attr recordingmode sum
+attr title "pause sent, sum"
+par Network.server.li typename "\"inet.common.MessageDispatcher\""
+par Network.server.li displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.server.li forwardServiceRegistration true
+par Network.server.li forwardProtocolRegistration true
+par Network.server.lo[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par Network.server.lo[0].lo.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par Network.server.lo[0].lo typename "\"inet.linklayer.loopback.Loopback\""
+par Network.server.lo[0].lo interfaceTableModule "\"Network.server.interfaceTable\""
+par Network.server.lo[0].lo mtu 4470B
+attr unit B
+scalar Network.server.lo[0].lo rcvdPkFromHl:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, count"
+scalar Network.server.lo[0].lo rcvdPkFromHl:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, sum(packetBytes)"
+scalar Network.server.lo[0].lo passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar Network.server.lo[0].lo passedUpPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+par Network.server.lo[0] typename "\"inet.linklayer.loopback.LoopbackInterface\""
+par Network.server.lo[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par Network.server.lo[0] recordPcap false
+par Network.server.lo[0] numPcapRecorders 0
+par Network.server.lo[0] interfaceTableModule "\"Network.server.interfaceTable\""
+scalar Network.server.lo[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar Network.server.lo[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar Network.server.lo[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar Network.server.lo[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par Network.server.eth[0].mac.phys$o.channel typename "\"ned.IdealChannel\""
+par Network.server.eth[0].phys$i.channel typename "\"ned.IdealChannel\""
+par Network.server.eth[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par Network.server.eth[0].mac.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par Network.server.eth[0].queue typename "\"inet.linklayer.ethernet.common.EthernetQueue\""
+par Network.server.eth[0].queue displayStringTextFormat "\"contains %p pk (%l) pushed %u\\npulled %o removed %r dropped %d\""
+par Network.server.eth[0].queue packetCapacity 1000
+par Network.server.eth[0].queue dataCapacity -1b
+attr unit b
+par Network.server.eth[0].queue dropperClass "\"inet::queueing::PacketAtCollectionEndDropper\""
+par Network.server.eth[0].queue comparatorClass "\"inet::EthernetFrameTypeComparator\""
+par Network.server.eth[0].queue bufferModule "\"\""
+scalar Network.server.eth[0].queue queueLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, last"
+attr unit pk
+scalar Network.server.eth[0].queue queueLength:max 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, max"
+attr unit pk
+scalar Network.server.eth[0].queue queueLength:timeavg 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, timeavg"
+attr unit pk
+scalar Network.server.eth[0].queue queueBitLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, last"
+attr unit b
+scalar Network.server.eth[0].queue queueBitLength:max 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, max"
+attr unit b
+scalar Network.server.eth[0].queue queueBitLength:timeavg 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, timeavg"
+attr unit b
+statistic Network.server.eth[0].queue queueingTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar Network.server.eth[0].queue outgoingPackets:count 0
+attr recordingmode count
+attr source packetPulled
+attr title "outgoing packets, count"
+attr unit pk
+scalar Network.server.eth[0].queue outgoingPacketLengths:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths, sum"
+attr unit b
+statistic Network.server.eth[0].queue outgoingPacketLengths:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic Network.server.eth[0].queue flowQueueingTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar Network.server.eth[0].queue incomingPackets:count 0
+attr recordingmode count
+attr source packetPushStarted
+attr title "incoming packets, count"
+attr unit pk
+scalar Network.server.eth[0].queue incomingPacketLengths:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths, sum"
+attr unit b
+statistic Network.server.eth[0].queue incomingPacketLengths:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar Network.server.eth[0].queue droppedPacketsQueueOverflow:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "dropped packets: queue overflow, count"
+attr unit pk
+scalar Network.server.eth[0].queue droppedPacketLengthsQueueOverflow:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow, sum"
+attr unit b
+par Network.server.eth[0].mac typename "\"inet.linklayer.ethernet.basic.EthernetMac\""
+par Network.server.eth[0].mac interfaceTableModule "\"Network.server.interfaceTable\""
+par Network.server.eth[0].mac displayStringTextFormat "\"rate: %b\\nsent: %s, rcvd: %r\\nqueue: %q, drop: %d\""
+par Network.server.eth[0].mac sendRawBytes false
+par Network.server.eth[0].mac promiscuous false
+par Network.server.eth[0].mac duplexMode true
+par Network.server.eth[0].mac mtu 1500B
+attr unit B
+par Network.server.eth[0].mac fcsMode "\"declared\""
+attr enum declared,computed
+par Network.server.eth[0].mac stopOperationExtraTime -1s
+attr unit s
+par Network.server.eth[0].mac stopOperationTimeout 2s
+attr unit s
+scalar Network.server.eth[0].mac "simulated time" 10
+scalar Network.server.eth[0].mac full-duplex 1
+scalar Network.server.eth[0].mac "frames/sec sent" 0
+scalar Network.server.eth[0].mac "frames/sec rcvd" 0
+scalar Network.server.eth[0].mac "bits/sec sent" 0
+scalar Network.server.eth[0].mac "bits/sec rcvd" 0
+scalar Network.server.eth[0].mac "rx channel idle (%)" 100
+scalar Network.server.eth[0].mac "rx channel utilization (%)" 0
+scalar Network.server.eth[0].mac txPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToLower
+attr title "packets transmitted, count"
+scalar Network.server.eth[0].mac txPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, sum(packetBytes)"
+scalar Network.server.eth[0].mac packetReceivedFromUpper:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, count"
+scalar Network.server.eth[0].mac packetReceivedFromUpper:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, sum(packetBytes)"
+scalar Network.server.eth[0].mac passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar Network.server.eth[0].mac passedUpPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+scalar Network.server.eth[0].mac packetDropIncorrectlyReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, count"
+scalar Network.server.eth[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, sum(packetBytes)"
+scalar Network.server.eth[0].mac packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, count"
+scalar Network.server.eth[0].mac packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, sum(packetBytes)"
+scalar Network.server.eth[0].mac packetDropNotAddressedToUs:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, count"
+scalar Network.server.eth[0].mac packetDropNotAddressedToUs:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, sum(packetBytes)"
+scalar Network.server.eth[0].mac rxPausePkUnits:count 0
+attr interpolationmode none
+attr recordingmode count
+attr title "pause units received, count"
+scalar Network.server.eth[0].mac rxPausePkUnits:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr title "pause units received, sum"
+scalar Network.server.eth[0].mac txPausePkUnits:count 0
+attr interpolationmode none
+attr recordingmode count
+attr title "pause units sent, count"
+scalar Network.server.eth[0].mac txPausePkUnits:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr title "pause units sent, sum"
+scalar Network.server.eth[0].mac rxPkOk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source rxPkOk
+attr title "packets received OK, count"
+scalar Network.server.eth[0].mac rxPkOk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, sum(packetBytes)"
+par Network.server.eth[0] typename "\"inet.linklayer.ethernet.EthernetInterface\""
+par Network.server.eth[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par Network.server.eth[0] recordPcap false
+par Network.server.eth[0] numPcapRecorders 0
+par Network.server.eth[0] interfaceTableModule "\"Network.server.interfaceTable\""
+par Network.server.eth[0] protocol "\"ethernetmac\""
+par Network.server.eth[0] address "\"0A-AA-00-00-00-01\""
+attr mutable ""
+par Network.server.eth[0] duplexMode true
+par Network.server.eth[0] csmacdSupport false
+par Network.server.eth[0] bitrate 0bps
+attr unit bps
+par Network.server.eth[0] fcsMode "\"declared\""
+attr enum declared,computed
+scalar Network.server.eth[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar Network.server.eth[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar Network.server.eth[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar Network.server.eth[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par Network.server.ipv4.transportIn.channel typename "\"ned.IdealChannel\""
+par Network.server.ipv4.up.out[0].channel typename "\"ned.IdealChannel\""
+par Network.server.ipv4.lp.out[2].channel typename "\"ned.IdealChannel\""
+par Network.server.ipv4.ifIn.channel typename "\"ned.IdealChannel\""
+par Network.server.ipv4.configurator typename "\"inet.networklayer.configurator.ipv4.Ipv4NodeConfigurator\""
+par Network.server.ipv4.configurator interfaceTableModule "\"Network.server.interfaceTable\""
+par Network.server.ipv4.configurator routingTableModule "\"Network.server.ipv4.routingTable\""
+par Network.server.ipv4.configurator networkConfiguratorModule "\"configurator\""
+par Network.server.ipv4.configurator configureRoutingTable true
+par Network.server.ipv4.routingTable typename "\"inet.networklayer.ipv4.Ipv4RoutingTable\""
+par Network.server.ipv4.routingTable interfaceTableModule "\"Network.server.interfaceTable\""
+par Network.server.ipv4.routingTable routerId "\"auto\""
+par Network.server.ipv4.routingTable netmaskRoutes "\"*\""
+par Network.server.ipv4.routingTable forwarding false
+par Network.server.ipv4.routingTable multicastForwarding false
+par Network.server.ipv4.routingTable useAdminDist false
+par Network.server.ipv4.routingTable routingFile "\"\""
+par Network.server.ipv4.natTable typename "\"inet.networklayer.ipv4.Ipv4NatTable\""
+par Network.server.ipv4.natTable networkProtocolModule "\"^.ip\""
+par Network.server.ipv4.natTable config "<config/> at content:1"
+par Network.server.ipv4.up typename "\"inet.common.MessageDispatcher\""
+par Network.server.ipv4.up displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.server.ipv4.up forwardServiceRegistration true
+par Network.server.ipv4.up forwardProtocolRegistration true
+par Network.server.ipv4.igmp typename "\"inet.networklayer.ipv4.Igmpv2\""
+par Network.server.ipv4.igmp interfaceTableModule "\"Network.server.interfaceTable\""
+par Network.server.ipv4.igmp routingTableModule "\"Network.server.ipv4.routingTable\""
+par Network.server.ipv4.igmp crcMode "\"declared\""
+attr enum declared,computed
+par Network.server.ipv4.igmp enabled true
+par Network.server.ipv4.igmp robustnessVariable 2
+par Network.server.ipv4.igmp queryInterval 125s
+attr unit s
+par Network.server.ipv4.igmp queryResponseInterval 10s
+attr unit s
+par Network.server.ipv4.igmp groupMembershipInterval 260s
+attr unit s
+par Network.server.ipv4.igmp otherQuerierPresentInterval 255s
+attr unit s
+par Network.server.ipv4.igmp startupQueryInterval 31.25s
+attr unit s
+par Network.server.ipv4.igmp startupQueryCount 2
+par Network.server.ipv4.igmp lastMemberQueryInterval 1s
+attr unit s
+par Network.server.ipv4.igmp lastMemberQueryCount 2
+par Network.server.ipv4.igmp unsolicitedReportInterval 10s
+attr unit s
+par Network.server.ipv4.icmp typename "\"inet.networklayer.ipv4.Icmp\""
+par Network.server.ipv4.icmp interfaceTableModule "\"Network.server.interfaceTable\""
+par Network.server.ipv4.icmp routingTableModule "\"Network.server.ipv4.routingTable\""
+par Network.server.ipv4.icmp crcMode "\"declared\""
+attr enum declared,computed
+attr mutable ""
+par Network.server.ipv4.icmp quoteLength 8B
+attr mutable ""
+attr unit B
+par Network.server.ipv4.mp typename "\"inet.common.MessageDispatcher\""
+par Network.server.ipv4.mp displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.server.ipv4.mp forwardServiceRegistration true
+par Network.server.ipv4.mp forwardProtocolRegistration true
+par Network.server.ipv4.ip typename "\"inet.networklayer.ipv4.Ipv4\""
+par Network.server.ipv4.ip interfaceTableModule "\"Network.server.interfaceTable\""
+par Network.server.ipv4.ip routingTableModule "\"Network.server.ipv4.routingTable\""
+par Network.server.ipv4.ip arpModule "\"Network.server.ipv4.arp\""
+par Network.server.ipv4.ip icmpModule "\"Network.server.ipv4.icmp\""
+par Network.server.ipv4.ip crcMode "\"declared\""
+attr enum declared,computed
+par Network.server.ipv4.ip timeToLive 32
+par Network.server.ipv4.ip multicastTimeToLive 32
+par Network.server.ipv4.ip fragmentTimeout 60s
+attr unit s
+par Network.server.ipv4.ip limitedBroadcast false
+par Network.server.ipv4.ip directBroadcastInterfaces "\"\""
+scalar Network.server.ipv4.ip packetDropAddressResolutionFailed:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, count"
+scalar Network.server.ipv4.ip packetDropAddressResolutionFailed:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, sum(packetBytes)"
+scalar Network.server.ipv4.ip packetDropHopLimitReached:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, count"
+scalar Network.server.ipv4.ip packetDropHopLimitReached:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, sum(packetBytes)"
+scalar Network.server.ipv4.ip packetDropForwardingDisabled:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, count"
+scalar Network.server.ipv4.ip packetDropForwardingDisabled:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, sum(packetBytes)"
+scalar Network.server.ipv4.ip packetDropNoInterfaceFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, count"
+scalar Network.server.ipv4.ip packetDropNoInterfaceFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, sum(packetBytes)"
+scalar Network.server.ipv4.ip packetDropNoRouteFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, count"
+scalar Network.server.ipv4.ip packetDropNoRouteFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, sum(packetBytes)"
+scalar Network.server.ipv4.ip packetDropUndefined:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, count"
+scalar Network.server.ipv4.ip packetDropUndefined:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, sum(packetBytes)"
+par Network.server.ipv4.arp typename "\"inet.networklayer.arp.ipv4.Arp\""
+par Network.server.ipv4.arp interfaceTableModule "\"Network.server.interfaceTable\""
+par Network.server.ipv4.arp routingTableModule "\"Network.server.ipv4.routingTable\""
+par Network.server.ipv4.arp retryTimeout 1s
+attr unit s
+par Network.server.ipv4.arp retryCount 3
+par Network.server.ipv4.arp cacheTimeout 120s
+attr unit s
+par Network.server.ipv4.arp proxyArpInterfaces "\"\""
+scalar Network.server.ipv4.arp arpReplySent:count 0
+attr recordingmode count
+attr source arpReplySent
+attr title "ARP replies sent, count"
+scalar Network.server.ipv4.arp arpReplySent:sum(packetBytes) 0
+attr recordingmode sum(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, sum(packetBytes)"
+scalar Network.server.ipv4.arp arpRequestSent:count 0
+attr recordingmode count
+attr source arpRequestSent
+attr title "ARP request sent, count"
+scalar Network.server.ipv4.arp arpRequestSent:sum(packetBytes) 0
+attr recordingmode sum(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, sum(packetBytes)"
+scalar Network.server.ipv4.arp arpResolutionFailed:count 0
+attr recordingmode count
+attr title "ARP failed resolutions, count"
+scalar Network.server.ipv4.arp arpResolutionCompleted:count 0
+attr recordingmode count
+attr title "ARP completed resolutions, count"
+scalar Network.server.ipv4.arp arpResolutionInitiated:count 0
+attr recordingmode count
+attr title "ARP initiated resolutions, count"
+par Network.server.ipv4.lp typename "\"inet.common.MessageDispatcher\""
+par Network.server.ipv4.lp displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.server.ipv4.lp forwardServiceRegistration true
+par Network.server.ipv4.lp forwardProtocolRegistration true
+par Network.server.ipv4 typename "\"inet.networklayer.ipv4.Ipv4NetworkLayer\""
+par Network.server.ipv4 forwarding false
+par Network.server.ipv4 multicastForwarding false
+par Network.server.ipv4 interfaceTableModule "\"Network.server.interfaceTable\""
+par Network.server.ipv4 displayStringTextFormat "\"%i\""
+par Network.server.nl typename "\"inet.common.MessageDispatcher\""
+par Network.server.nl displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.server.nl forwardServiceRegistration true
+par Network.server.nl forwardProtocolRegistration true
+par Network.server.udp typename "\"inet.transportlayer.udp.Udp\""
+par Network.server.udp interfaceTableModule "\"Network.server.interfaceTable\""
+par Network.server.udp icmpModule "\"^.ipv4.icmp\""
+par Network.server.udp icmpv6Module "\"^.ipv6.icmpv6\""
+par Network.server.udp crcMode "\"declared\""
+attr enum disabled,declared,computed
+par Network.server.udp defaultMulticastLoop true
+scalar Network.server.udp packetReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceived
+attr title "packets received, count"
+scalar Network.server.udp packetReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceived
+attr title "packets received, sum(packetBytes)"
+scalar Network.server.udp packetSent:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSent
+attr title "packets sent, count"
+scalar Network.server.udp packetSent:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSent
+attr title "packets sent, sum(packetBytes)"
+scalar Network.server.udp passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed up, count"
+scalar Network.server.udp droppedPkWrongPort:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+scalar Network.server.udp droppedPkBadChecksum:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+par Network.server.tcp.conn-0 typename "\"inet.transportlayer.tcp.TcpConnection\""
+par Network.server.tcp typename "\"inet.transportlayer.tcp.Tcp\""
+par Network.server.tcp crcMode "\"declared\""
+attr enum declared,computed
+par Network.server.tcp advertisedWindow 7504
+par Network.server.tcp delayedAcksEnabled false
+par Network.server.tcp nagleEnabled true
+par Network.server.tcp limitedTransmitEnabled false
+par Network.server.tcp increasedIWEnabled false
+par Network.server.tcp sackSupport false
+par Network.server.tcp windowScalingSupport false
+par Network.server.tcp windowScalingFactor -1
+par Network.server.tcp timestampSupport false
+par Network.server.tcp mss 536
+par Network.server.tcp msl 120s
+attr unit s
+par Network.server.tcp tcpAlgorithmClass "\"TcpReno\""
+attr enum TcpVegas,TcpWestwood,TcpNewReno,TcpReno,TcpTahoe,TcpNoCongestionControl
+par Network.server.tcp useDataNotification false
+par Network.server.tcp dupthresh 3
+par Network.server.tcp initialSsthresh 4294967295
+par Network.server.tcp stopOperationExtraTime 0s
+attr unit s
+par Network.server.tcp stopOperationTimeout 2s
+attr unit s
+par Network.server.tcp ecnWillingness false
+par Network.server.tcp dctcpGamma 0.0625
+par Network.server.tn typename "\"inet.common.MessageDispatcher\""
+par Network.server.tn displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.server.tn forwardServiceRegistration true
+par Network.server.tn forwardProtocolRegistration true
+par Network.server.app[0] typename "\"inet.applications.tcpapp.TcpEchoApp\""
+par Network.server.app[0] localAddress "\"\""
+par Network.server.app[0] localPort 1000
+par Network.server.app[0] serverThreadModuleType "\"inet.applications.tcpapp.TcpEchoAppThread\""
+par Network.server.app[0] stopOperationExtraTime -1s
+attr unit s
+par Network.server.app[0] stopOperationTimeout 2s
+attr unit s
+par Network.server.app[0] echoFactor 1
+par Network.server.app[0] echoDelay 0s
+attr unit s
+scalar Network.server.app[0] bytesRcvd 0
+scalar Network.server.app[0] bytesSent 0
+scalar Network.server.app[0] packetReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceived
+attr title "packets received, count"
+scalar Network.server.app[0] packetReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceived
+attr title "packets received, sum(packetBytes)"
+statistic Network.server.app[0] endToEndDelay:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic Network.server.app[0] endToEndDelay:weightedHistogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field weights 0
+field weightedSum 0
+field sqrSumWeights 0
+field weightedSqrSum 0
+attr interpolationmode none
+attr recordingmode weightedHistogram
+attr source dataAge(packetReceived)
+attr title "end-to-end delay, weightedHistogram"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar Network.server.app[0] packetSent:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSent
+attr title "packets sent, count"
+scalar Network.server.app[0] packetSent:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSent
+attr title "packets sent, sum(packetBytes)"
+par Network.server.at typename "\"inet.common.MessageDispatcher\""
+par Network.server.at displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.server.at forwardServiceRegistration true
+par Network.server.at forwardProtocolRegistration true
+par Network.server typename "\"inet.node.inet.StandardHost\""
+par Network.server hasStatus false
+par Network.server osgModel "\"\""
+par Network.server osgModelColor "\"\""
+par Network.server canvasImage "\"\""
+par Network.server canvasImageColor "\"\""
+par Network.server recordPcap false
+par Network.server numPcapRecorders 0
+par Network.server numLoInterfaces 1
+par Network.server numWlanInterfaces 0
+par Network.server numEthInterfaces 0
+par Network.server numPppInterfaces 0
+par Network.server numTunInterfaces 0
+par Network.server numVirtInterfaces 0
+par Network.server fcsMode "\"declared\""
+attr enum declared,computed
+par Network.server hasIpv4 true
+par Network.server hasIpv6 false
+par Network.server hasGn false
+par Network.server forwarding false
+par Network.server multicastForwarding false
+par Network.server hasUdp true
+par Network.server hasTcp true
+par Network.server hasSctp false
+par Network.server numApps 1
+par Network.client.ethg$i[0].channel typename "\"ned.IdealChannel\""
+par Network.client.eth[0].phys$o.channel typename "\"ned.IdealChannel\""
+par Network.client.interfaceTable typename "\"inet.networklayer.common.InterfaceTable\""
+par Network.client.interfaceTable displayAddresses false
+par Network.client.cb typename "\"inet.common.MessageDispatcher\""
+par Network.client.cb displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.client.cb forwardServiceRegistration true
+par Network.client.cb forwardProtocolRegistration true
+par Network.client.bl typename "\"inet.common.MessageDispatcher\""
+par Network.client.bl displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.client.bl forwardServiceRegistration true
+par Network.client.bl forwardProtocolRegistration true
+par Network.client.ethernet typename "\"inet.linklayer.ethernet.basic.EthernetEncapsulation\""
+par Network.client.ethernet registerProtocol true
+par Network.client.ethernet interfaceTableModule "\"Network.client.interfaceTable\""
+par Network.client.ethernet fcsMode "\"declared\""
+attr enum declared,computed
+par Network.client.ethernet stopOperationExtraTime -1s
+attr unit s
+par Network.client.ethernet stopOperationTimeout 2s
+attr unit s
+scalar Network.client.ethernet decapPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source decapPk
+attr title "packets decapsulated, count"
+scalar Network.client.ethernet decapPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source decapPk
+attr title "packets decapsulated, sum(packetBytes)"
+scalar Network.client.ethernet encapPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source encapPk
+attr title "packets encapsulated, count"
+scalar Network.client.ethernet encapPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source encapPk
+attr title "packets encapsulated, sum(packetBytes)"
+scalar Network.client.ethernet pauseSent:count 0
+attr recordingmode count
+attr title "pause sent, count"
+scalar Network.client.ethernet pauseSent:sum 0
+attr recordingmode sum
+attr title "pause sent, sum"
+par Network.client.li typename "\"inet.common.MessageDispatcher\""
+par Network.client.li displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.client.li forwardServiceRegistration true
+par Network.client.li forwardProtocolRegistration true
+par Network.client.lo[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par Network.client.lo[0].lo.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par Network.client.lo[0].lo typename "\"inet.linklayer.loopback.Loopback\""
+par Network.client.lo[0].lo interfaceTableModule "\"Network.client.interfaceTable\""
+par Network.client.lo[0].lo mtu 4470B
+attr unit B
+scalar Network.client.lo[0].lo rcvdPkFromHl:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, count"
+scalar Network.client.lo[0].lo rcvdPkFromHl:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, sum(packetBytes)"
+scalar Network.client.lo[0].lo passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar Network.client.lo[0].lo passedUpPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+par Network.client.lo[0] typename "\"inet.linklayer.loopback.LoopbackInterface\""
+par Network.client.lo[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par Network.client.lo[0] recordPcap false
+par Network.client.lo[0] numPcapRecorders 0
+par Network.client.lo[0] interfaceTableModule "\"Network.client.interfaceTable\""
+scalar Network.client.lo[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar Network.client.lo[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar Network.client.lo[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar Network.client.lo[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par Network.client.eth[0].mac.phys$o.channel typename "\"ned.IdealChannel\""
+par Network.client.eth[0].phys$i.channel typename "\"ned.IdealChannel\""
+par Network.client.eth[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par Network.client.eth[0].mac.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par Network.client.eth[0].queue typename "\"inet.linklayer.ethernet.common.EthernetQueue\""
+par Network.client.eth[0].queue displayStringTextFormat "\"contains %p pk (%l) pushed %u\\npulled %o removed %r dropped %d\""
+par Network.client.eth[0].queue packetCapacity 1000
+par Network.client.eth[0].queue dataCapacity -1b
+attr unit b
+par Network.client.eth[0].queue dropperClass "\"inet::queueing::PacketAtCollectionEndDropper\""
+par Network.client.eth[0].queue comparatorClass "\"inet::EthernetFrameTypeComparator\""
+par Network.client.eth[0].queue bufferModule "\"\""
+scalar Network.client.eth[0].queue queueLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, last"
+attr unit pk
+scalar Network.client.eth[0].queue queueLength:max 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, max"
+attr unit pk
+scalar Network.client.eth[0].queue queueLength:timeavg 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, timeavg"
+attr unit pk
+scalar Network.client.eth[0].queue queueBitLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, last"
+attr unit b
+scalar Network.client.eth[0].queue queueBitLength:max 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, max"
+attr unit b
+scalar Network.client.eth[0].queue queueBitLength:timeavg 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, timeavg"
+attr unit b
+statistic Network.client.eth[0].queue queueingTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar Network.client.eth[0].queue outgoingPackets:count 0
+attr recordingmode count
+attr source packetPulled
+attr title "outgoing packets, count"
+attr unit pk
+scalar Network.client.eth[0].queue outgoingPacketLengths:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths, sum"
+attr unit b
+statistic Network.client.eth[0].queue outgoingPacketLengths:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic Network.client.eth[0].queue flowQueueingTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar Network.client.eth[0].queue incomingPackets:count 0
+attr recordingmode count
+attr source packetPushStarted
+attr title "incoming packets, count"
+attr unit pk
+scalar Network.client.eth[0].queue incomingPacketLengths:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths, sum"
+attr unit b
+statistic Network.client.eth[0].queue incomingPacketLengths:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar Network.client.eth[0].queue droppedPacketsQueueOverflow:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "dropped packets: queue overflow, count"
+attr unit pk
+scalar Network.client.eth[0].queue droppedPacketLengthsQueueOverflow:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow, sum"
+attr unit b
+par Network.client.eth[0].mac typename "\"inet.linklayer.ethernet.basic.EthernetMac\""
+par Network.client.eth[0].mac interfaceTableModule "\"Network.client.interfaceTable\""
+par Network.client.eth[0].mac displayStringTextFormat "\"rate: %b\\nsent: %s, rcvd: %r\\nqueue: %q, drop: %d\""
+par Network.client.eth[0].mac sendRawBytes false
+par Network.client.eth[0].mac promiscuous false
+par Network.client.eth[0].mac duplexMode true
+par Network.client.eth[0].mac mtu 1500B
+attr unit B
+par Network.client.eth[0].mac fcsMode "\"declared\""
+attr enum declared,computed
+par Network.client.eth[0].mac stopOperationExtraTime -1s
+attr unit s
+par Network.client.eth[0].mac stopOperationTimeout 2s
+attr unit s
+scalar Network.client.eth[0].mac "simulated time" 10
+scalar Network.client.eth[0].mac full-duplex 1
+scalar Network.client.eth[0].mac "frames/sec sent" 0
+scalar Network.client.eth[0].mac "frames/sec rcvd" 0
+scalar Network.client.eth[0].mac "bits/sec sent" 0
+scalar Network.client.eth[0].mac "bits/sec rcvd" 0
+scalar Network.client.eth[0].mac "rx channel idle (%)" 100
+scalar Network.client.eth[0].mac "rx channel utilization (%)" 0
+scalar Network.client.eth[0].mac txPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToLower
+attr title "packets transmitted, count"
+scalar Network.client.eth[0].mac txPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, sum(packetBytes)"
+scalar Network.client.eth[0].mac packetReceivedFromUpper:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, count"
+scalar Network.client.eth[0].mac packetReceivedFromUpper:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, sum(packetBytes)"
+scalar Network.client.eth[0].mac passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar Network.client.eth[0].mac passedUpPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+scalar Network.client.eth[0].mac packetDropIncorrectlyReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, count"
+scalar Network.client.eth[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, sum(packetBytes)"
+scalar Network.client.eth[0].mac packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, count"
+scalar Network.client.eth[0].mac packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, sum(packetBytes)"
+scalar Network.client.eth[0].mac packetDropNotAddressedToUs:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, count"
+scalar Network.client.eth[0].mac packetDropNotAddressedToUs:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, sum(packetBytes)"
+scalar Network.client.eth[0].mac rxPausePkUnits:count 0
+attr interpolationmode none
+attr recordingmode count
+attr title "pause units received, count"
+scalar Network.client.eth[0].mac rxPausePkUnits:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr title "pause units received, sum"
+scalar Network.client.eth[0].mac txPausePkUnits:count 0
+attr interpolationmode none
+attr recordingmode count
+attr title "pause units sent, count"
+scalar Network.client.eth[0].mac txPausePkUnits:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr title "pause units sent, sum"
+scalar Network.client.eth[0].mac rxPkOk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source rxPkOk
+attr title "packets received OK, count"
+scalar Network.client.eth[0].mac rxPkOk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, sum(packetBytes)"
+par Network.client.eth[0] typename "\"inet.linklayer.ethernet.EthernetInterface\""
+par Network.client.eth[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par Network.client.eth[0] recordPcap false
+par Network.client.eth[0] numPcapRecorders 0
+par Network.client.eth[0] interfaceTableModule "\"Network.client.interfaceTable\""
+par Network.client.eth[0] protocol "\"ethernetmac\""
+par Network.client.eth[0] address "\"0A-AA-00-00-00-02\""
+attr mutable ""
+par Network.client.eth[0] duplexMode true
+par Network.client.eth[0] csmacdSupport false
+par Network.client.eth[0] bitrate 0bps
+attr unit bps
+par Network.client.eth[0] fcsMode "\"declared\""
+attr enum declared,computed
+scalar Network.client.eth[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar Network.client.eth[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar Network.client.eth[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar Network.client.eth[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par Network.client.ipv4.transportIn.channel typename "\"ned.IdealChannel\""
+par Network.client.ipv4.up.out[0].channel typename "\"ned.IdealChannel\""
+par Network.client.ipv4.lp.out[2].channel typename "\"ned.IdealChannel\""
+par Network.client.ipv4.ifIn.channel typename "\"ned.IdealChannel\""
+par Network.client.ipv4.configurator typename "\"inet.networklayer.configurator.ipv4.Ipv4NodeConfigurator\""
+par Network.client.ipv4.configurator interfaceTableModule "\"Network.client.interfaceTable\""
+par Network.client.ipv4.configurator routingTableModule "\"Network.client.ipv4.routingTable\""
+par Network.client.ipv4.configurator networkConfiguratorModule "\"configurator\""
+par Network.client.ipv4.configurator configureRoutingTable true
+par Network.client.ipv4.routingTable typename "\"inet.networklayer.ipv4.Ipv4RoutingTable\""
+par Network.client.ipv4.routingTable interfaceTableModule "\"Network.client.interfaceTable\""
+par Network.client.ipv4.routingTable routerId "\"auto\""
+par Network.client.ipv4.routingTable netmaskRoutes "\"*\""
+par Network.client.ipv4.routingTable forwarding false
+par Network.client.ipv4.routingTable multicastForwarding false
+par Network.client.ipv4.routingTable useAdminDist false
+par Network.client.ipv4.routingTable routingFile "\"\""
+par Network.client.ipv4.natTable typename "\"inet.networklayer.ipv4.Ipv4NatTable\""
+par Network.client.ipv4.natTable networkProtocolModule "\"^.ip\""
+par Network.client.ipv4.natTable config "<config/> at content:1"
+par Network.client.ipv4.up typename "\"inet.common.MessageDispatcher\""
+par Network.client.ipv4.up displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.client.ipv4.up forwardServiceRegistration true
+par Network.client.ipv4.up forwardProtocolRegistration true
+par Network.client.ipv4.igmp typename "\"inet.networklayer.ipv4.Igmpv2\""
+par Network.client.ipv4.igmp interfaceTableModule "\"Network.client.interfaceTable\""
+par Network.client.ipv4.igmp routingTableModule "\"Network.client.ipv4.routingTable\""
+par Network.client.ipv4.igmp crcMode "\"declared\""
+attr enum declared,computed
+par Network.client.ipv4.igmp enabled true
+par Network.client.ipv4.igmp robustnessVariable 2
+par Network.client.ipv4.igmp queryInterval 125s
+attr unit s
+par Network.client.ipv4.igmp queryResponseInterval 10s
+attr unit s
+par Network.client.ipv4.igmp groupMembershipInterval 260s
+attr unit s
+par Network.client.ipv4.igmp otherQuerierPresentInterval 255s
+attr unit s
+par Network.client.ipv4.igmp startupQueryInterval 31.25s
+attr unit s
+par Network.client.ipv4.igmp startupQueryCount 2
+par Network.client.ipv4.igmp lastMemberQueryInterval 1s
+attr unit s
+par Network.client.ipv4.igmp lastMemberQueryCount 2
+par Network.client.ipv4.igmp unsolicitedReportInterval 10s
+attr unit s
+par Network.client.ipv4.icmp typename "\"inet.networklayer.ipv4.Icmp\""
+par Network.client.ipv4.icmp interfaceTableModule "\"Network.client.interfaceTable\""
+par Network.client.ipv4.icmp routingTableModule "\"Network.client.ipv4.routingTable\""
+par Network.client.ipv4.icmp crcMode "\"declared\""
+attr enum declared,computed
+attr mutable ""
+par Network.client.ipv4.icmp quoteLength 8B
+attr mutable ""
+attr unit B
+par Network.client.ipv4.mp typename "\"inet.common.MessageDispatcher\""
+par Network.client.ipv4.mp displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.client.ipv4.mp forwardServiceRegistration true
+par Network.client.ipv4.mp forwardProtocolRegistration true
+par Network.client.ipv4.ip typename "\"inet.networklayer.ipv4.Ipv4\""
+par Network.client.ipv4.ip interfaceTableModule "\"Network.client.interfaceTable\""
+par Network.client.ipv4.ip routingTableModule "\"Network.client.ipv4.routingTable\""
+par Network.client.ipv4.ip arpModule "\"Network.client.ipv4.arp\""
+par Network.client.ipv4.ip icmpModule "\"Network.client.ipv4.icmp\""
+par Network.client.ipv4.ip crcMode "\"declared\""
+attr enum declared,computed
+par Network.client.ipv4.ip timeToLive 32
+par Network.client.ipv4.ip multicastTimeToLive 32
+par Network.client.ipv4.ip fragmentTimeout 60s
+attr unit s
+par Network.client.ipv4.ip limitedBroadcast false
+par Network.client.ipv4.ip directBroadcastInterfaces "\"\""
+scalar Network.client.ipv4.ip packetDropAddressResolutionFailed:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, count"
+scalar Network.client.ipv4.ip packetDropAddressResolutionFailed:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, sum(packetBytes)"
+scalar Network.client.ipv4.ip packetDropHopLimitReached:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, count"
+scalar Network.client.ipv4.ip packetDropHopLimitReached:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, sum(packetBytes)"
+scalar Network.client.ipv4.ip packetDropForwardingDisabled:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, count"
+scalar Network.client.ipv4.ip packetDropForwardingDisabled:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, sum(packetBytes)"
+scalar Network.client.ipv4.ip packetDropNoInterfaceFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, count"
+scalar Network.client.ipv4.ip packetDropNoInterfaceFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, sum(packetBytes)"
+scalar Network.client.ipv4.ip packetDropNoRouteFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, count"
+scalar Network.client.ipv4.ip packetDropNoRouteFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, sum(packetBytes)"
+scalar Network.client.ipv4.ip packetDropUndefined:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, count"
+scalar Network.client.ipv4.ip packetDropUndefined:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, sum(packetBytes)"
+par Network.client.ipv4.arp typename "\"inet.networklayer.arp.ipv4.Arp\""
+par Network.client.ipv4.arp interfaceTableModule "\"Network.client.interfaceTable\""
+par Network.client.ipv4.arp routingTableModule "\"Network.client.ipv4.routingTable\""
+par Network.client.ipv4.arp retryTimeout 1s
+attr unit s
+par Network.client.ipv4.arp retryCount 3
+par Network.client.ipv4.arp cacheTimeout 120s
+attr unit s
+par Network.client.ipv4.arp proxyArpInterfaces "\"\""
+scalar Network.client.ipv4.arp arpReplySent:count 0
+attr recordingmode count
+attr source arpReplySent
+attr title "ARP replies sent, count"
+scalar Network.client.ipv4.arp arpReplySent:sum(packetBytes) 0
+attr recordingmode sum(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, sum(packetBytes)"
+scalar Network.client.ipv4.arp arpRequestSent:count 0
+attr recordingmode count
+attr source arpRequestSent
+attr title "ARP request sent, count"
+scalar Network.client.ipv4.arp arpRequestSent:sum(packetBytes) 0
+attr recordingmode sum(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, sum(packetBytes)"
+scalar Network.client.ipv4.arp arpResolutionFailed:count 0
+attr recordingmode count
+attr title "ARP failed resolutions, count"
+scalar Network.client.ipv4.arp arpResolutionCompleted:count 0
+attr recordingmode count
+attr title "ARP completed resolutions, count"
+scalar Network.client.ipv4.arp arpResolutionInitiated:count 0
+attr recordingmode count
+attr title "ARP initiated resolutions, count"
+par Network.client.ipv4.lp typename "\"inet.common.MessageDispatcher\""
+par Network.client.ipv4.lp displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.client.ipv4.lp forwardServiceRegistration true
+par Network.client.ipv4.lp forwardProtocolRegistration true
+par Network.client.ipv4 typename "\"inet.networklayer.ipv4.Ipv4NetworkLayer\""
+par Network.client.ipv4 forwarding false
+par Network.client.ipv4 multicastForwarding false
+par Network.client.ipv4 interfaceTableModule "\"Network.client.interfaceTable\""
+par Network.client.ipv4 displayStringTextFormat "\"%i\""
+par Network.client.nl typename "\"inet.common.MessageDispatcher\""
+par Network.client.nl displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.client.nl forwardServiceRegistration true
+par Network.client.nl forwardProtocolRegistration true
+par Network.client.udp typename "\"inet.transportlayer.udp.Udp\""
+par Network.client.udp interfaceTableModule "\"Network.client.interfaceTable\""
+par Network.client.udp icmpModule "\"^.ipv4.icmp\""
+par Network.client.udp icmpv6Module "\"^.ipv6.icmpv6\""
+par Network.client.udp crcMode "\"declared\""
+attr enum disabled,declared,computed
+par Network.client.udp defaultMulticastLoop true
+scalar Network.client.udp packetReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceived
+attr title "packets received, count"
+scalar Network.client.udp packetReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceived
+attr title "packets received, sum(packetBytes)"
+scalar Network.client.udp packetSent:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSent
+attr title "packets sent, count"
+scalar Network.client.udp packetSent:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSent
+attr title "packets sent, sum(packetBytes)"
+scalar Network.client.udp passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed up, count"
+scalar Network.client.udp droppedPkWrongPort:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+scalar Network.client.udp droppedPkBadChecksum:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+par Network.client.tcp typename "\"inet.transportlayer.tcp.Tcp\""
+par Network.client.tcp crcMode "\"declared\""
+attr enum declared,computed
+par Network.client.tcp advertisedWindow 7504
+par Network.client.tcp delayedAcksEnabled false
+par Network.client.tcp nagleEnabled true
+par Network.client.tcp limitedTransmitEnabled false
+par Network.client.tcp increasedIWEnabled false
+par Network.client.tcp sackSupport false
+par Network.client.tcp windowScalingSupport false
+par Network.client.tcp windowScalingFactor -1
+par Network.client.tcp timestampSupport false
+par Network.client.tcp mss 536
+par Network.client.tcp msl 120s
+attr unit s
+par Network.client.tcp tcpAlgorithmClass "\"TcpReno\""
+attr enum TcpVegas,TcpWestwood,TcpNewReno,TcpReno,TcpTahoe,TcpNoCongestionControl
+par Network.client.tcp useDataNotification false
+par Network.client.tcp dupthresh 3
+par Network.client.tcp initialSsthresh 4294967295
+par Network.client.tcp stopOperationExtraTime 0s
+attr unit s
+par Network.client.tcp stopOperationTimeout 2s
+attr unit s
+par Network.client.tcp ecnWillingness false
+par Network.client.tcp dctcpGamma 0.0625
+par Network.client.tn typename "\"inet.common.MessageDispatcher\""
+par Network.client.tn displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.client.tn forwardServiceRegistration true
+par Network.client.tn forwardProtocolRegistration true
+par Network.client.app[0] typename "\"inet.applications.tcpapp.TcpSessionApp\""
+par Network.client.app[0] localAddress "\"\""
+par Network.client.app[0] localPort -1
+par Network.client.app[0] active true
+par Network.client.app[0] connectAddress "\"server\""
+par Network.client.app[0] connectPort 1000
+par Network.client.app[0] dataTransferMode "\"bytecount\""
+attr enum bytecount,object,bytestream
+par Network.client.app[0] tOpen 1s
+attr unit s
+par Network.client.app[0] tSend 1s
+attr unit s
+par Network.client.app[0] sendBytes 1000000B
+attr unit B
+par Network.client.app[0] sendScript "\"\""
+par Network.client.app[0] tClose 2s
+attr unit s
+par Network.client.app[0] timeToLive -1
+par Network.client.app[0] dscp -1
+par Network.client.app[0] tos -1
+par Network.client.app[0] stopOperationExtraTime -1s
+attr unit s
+par Network.client.app[0] stopOperationTimeout 2s
+attr unit s
+scalar Network.client.app[0] bytesRcvd 0
+scalar Network.client.app[0] bytesSent 0
+scalar Network.client.app[0] packetReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceived
+attr title "packets received, count"
+scalar Network.client.app[0] packetReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceived
+attr title "packets received, sum(packetBytes)"
+statistic Network.client.app[0] endToEndDelay:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic Network.client.app[0] endToEndDelay:weightedHistogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field weights 0
+field weightedSum 0
+field sqrSumWeights 0
+field weightedSqrSum 0
+attr interpolationmode none
+attr recordingmode weightedHistogram
+attr source dataAge(packetReceived)
+attr title "end-to-end delay, weightedHistogram"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar Network.client.app[0] packetSent:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSent
+attr title "packets sent, count"
+scalar Network.client.app[0] packetSent:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSent
+attr title "packets sent, sum(packetBytes)"
+par Network.client.at typename "\"inet.common.MessageDispatcher\""
+par Network.client.at displayStringTextFormat "\"processed %p pk (%l)\""
+par Network.client.at forwardServiceRegistration true
+par Network.client.at forwardProtocolRegistration true
+par Network.client typename "\"inet.node.inet.StandardHost\""
+par Network.client hasStatus false
+par Network.client osgModel "\"\""
+par Network.client osgModelColor "\"\""
+par Network.client canvasImage "\"\""
+par Network.client canvasImageColor "\"\""
+par Network.client recordPcap false
+par Network.client numPcapRecorders 0
+par Network.client numLoInterfaces 1
+par Network.client numWlanInterfaces 0
+par Network.client numEthInterfaces 0
+par Network.client numPppInterfaces 0
+par Network.client numTunInterfaces 0
+par Network.client numVirtInterfaces 0
+par Network.client fcsMode "\"declared\""
+attr enum declared,computed
+par Network.client hasIpv4 true
+par Network.client hasIpv6 false
+par Network.client hasGn false
+par Network.client forwarding false
+par Network.client multicastForwarding false
+par Network.client hasUdp true
+par Network.client hasTcp true
+par Network.client hasSctp false
+par Network.client numApps 1
+par Network.Configurator typename "\"inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator\""
+par Network.Configurator minLinkWeight 0.001
+par Network.Configurator configureIsolatedNetworksSeparatly false
+par Network.Configurator config "<config>...</config> at content:1"
+par Network.Configurator assignAddresses true
+par Network.Configurator assignUniqueAddresses true
+par Network.Configurator assignDisjunctSubnetAddresses true
+par Network.Configurator addStaticRoutes true
+par Network.Configurator addDefaultRoutes true
+par Network.Configurator addSubnetRoutes true
+par Network.Configurator addDirectRoutes true
+par Network.Configurator optimizeRoutes true
+par Network.Configurator dumpTopology false
+par Network.Configurator dumpLinks false
+par Network.Configurator dumpAddresses false
+par Network.Configurator dumpRoutes false
+par Network.Configurator dumpConfig "\"\""
+par Network typename "\"demo1.simulations.Network\""
+
